@@ -4,6 +4,8 @@ End-to-end MySQL analysis of a 3-year multi-store bike retailer dataset (Jan 201
 
 The goal of this project was not just to write queries, but to answer the questions a business stakeholder actually asks: *why is revenue moving the way it is, why are customers not coming back, which products are worth restocking, and is our discount strategy working.*
 
+> **Dataset note:** This uses the publicly available "BikeStores" sample dataset, commonly used for SQL practice. All cleaning, view design, and business insights below are original analysis performed on top of it.
+
 ---
 
 ## 🔍 Key Findings
@@ -35,6 +37,14 @@ Across both discount bands present in the data (Low 1–10%, Medium 11–20%), t
 
 ---
 
+## 🗂️ Database Schema
+
+9 relational tables — customers and orders on one side, products/stocks/brands/categories on the other, joined through `order_items` as the central fact table.
+
+![Bike Store ERD](screenshots/06_erd_schema.png)
+
+---
+
 ## 🛠️ What This Project Covers
 
 **Data Cleaning**
@@ -63,28 +73,63 @@ Built using window functions, CTEs, and date functions — not just flat aggrega
 
 **Techniques used:** `LAG()`, `RANK()`, `DENSE_RANK()`, `NTILE()`, `ROW_NUMBER()`, CTEs (`WITH`), `DATEDIFF`, `DATE_FORMAT`, `CASE`-based segmentation, correlated subqueries, and multi-table joins across a 9-table relational schema.
 
+**Sample — Customer RFM Segmentation** (CTE + window functions, used to power finding #1 above):
+
+```sql
+WITH customer_orders AS (
+    SELECT
+        cu.customer_id,
+        CONCAT(cu.first_name, ' ', cu.last_name) AS customer_name,
+        COUNT(DISTINCT o.order_id) AS frequency,
+        SUM(oi.quantity * oi.list_price * (1 - oi.discount)) AS monetary,
+        DATEDIFF((SELECT MAX(order_date) FROM orders), MAX(o.order_date)) AS recency_days
+    FROM customers cu
+    JOIN orders o ON o.customer_id = cu.customer_id
+    JOIN order_items oi ON oi.order_id = o.order_id
+    GROUP BY cu.customer_id, cu.first_name, cu.last_name
+)
+SELECT
+    customer_id, customer_name, frequency, monetary, recency_days,
+    NTILE(4) OVER (ORDER BY recency_days ASC)  AS recency_score,
+    NTILE(4) OVER (ORDER BY frequency DESC)    AS frequency_score,
+    NTILE(4) OVER (ORDER BY monetary DESC)     AS monetary_score,
+    CASE
+        WHEN frequency = 1 THEN 'One-Time Buyer'
+        WHEN frequency > 1 AND recency_days <= 180 THEN 'Active Repeat Customer'
+        WHEN frequency > 1 AND recency_days > 180 THEN 'At-Risk Repeat Customer'
+    END AS customer_segment
+FROM customer_orders;
+```
+
+Full logic for all 12 views is in [`analysis/bike_store_analysis_views.sql`](analysis/bike_store_analysis_views.sql). Cleaning steps are in [`analysis/bike_store_data_cleaning.sql`](analysis/bike_store_data_cleaning.sql).
+
 ---
 
 ## 📁 Repository Structure
 
 ```
 bike-store-sql-analysis/
-├── bike_store_combined.sql            ← Raw data import (9 tables, ~10,500 rows)
-├── bike_store_clean_and_insights.sql  ← Data cleaning + 12 analytical views
+├── raw_data/
+│   └── bike_store_combined.sql          ← Raw data import (9 tables, ~10,500 rows)
+├── analysis/
+│   ├── bike_store_data_cleaning.sql     ← Data cleaning (NULL fixes, type corrections, status lookup)
+│   └── bike_store_analysis_views.sql    ← 12 business-insight views
 ├── screenshots/
 │   ├── 01_customer_retention.png
 │   ├── 02_category_performance.png
 │   ├── 03_monthly_revenue_trend.png
 │   ├── 04_top_bottom_products.png
-│   └── 05_discount_effectiveness.png
+│   ├── 05_discount_effectiveness.png
+│   └── 06_erd_schema.png
 └── README.md
 ```
 
 ## ▶️ How to Run
 
-1. Execute `bike_store_combined.sql` first — creates the `bike_store` database and loads all 9 raw tables
-2. Execute `bike_store_clean_and_insights.sql` second — cleans the data and builds all 12 views
-3. Query any view directly, e.g.:
+1. Execute `raw_data/bike_store_combined.sql` — creates the `bike_store` database and loads all 9 raw tables
+2. Execute `analysis/bike_store_data_cleaning.sql` — fixes data quality issues and adds the status lookup table
+3. Execute `analysis/bike_store_analysis_views.sql` — builds all 12 analytical views
+4. Query any view directly, e.g.:
    ```sql
    SELECT * FROM vw_customer_retention_summary;
    ```
