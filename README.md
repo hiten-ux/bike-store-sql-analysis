@@ -13,27 +13,31 @@ The goal of this project was not just to write queries, but to answer the questi
 **1. Customer retention is low — a real problem, not a minor stat**
 Only **9.07%** of customers (131 of 1,445) ever placed a second order. Over 90% of the customer base was acquired once and never returned, which points to an acquisition-heavy, retention-light business model with no visible loyalty or win-back mechanism.
 
-![Customer Retention Summary](screenshots/01_customer_retention.png)
+!<img width="650" height="88" alt="Screenshot 2026-07-30 134559" src="https://github.com/user-attachments/assets/63fb4270-189a-4968-a7cc-5b9beea16864" />
 
 **2. Revenue is concentrated in one category, but not the one that sells the most units**
 Mountain Bikes generate **35.31%** of total revenue ($2.72M) despite Cruisers Bicycles moving more total units (2,063 vs. 1,755). This is a classic volume-vs-price-mix gap — Mountain Bikes carry a materially higher price point, so unit volume alone is a misleading measure of category importance.
 
-![Category Performance](screenshots/02_category_performance.png)
+<img width="706" height="460" alt="Screenshot 2026-07-30 134723" src="https://github.com/user-attachments/assets/fce49864-71aa-43d7-9cf0-9a6f73ccfc59" />
 
 **3. Revenue trended upward through mid-2017, then the data collection window ends**
 Monthly revenue climbed from ~$215K (Jan 2016) to a peak of **$378,865** in June 2017, with real month-to-month volatility along the way (swings of ±20–40%). From May 2018 onward, order volume collapses to 1–4 orders/month — this is almost certainly the dataset's collection cutoff rather than a genuine business collapse, and the trend analysis is scoped accordingly to Jan 2016–Apr 2018.
 
-![Monthly Revenue Trend](screenshots/03_monthly_revenue_trend.png)
+<img width="917" height="723" alt="Screenshot 2026-07-30 134927" src="https://github.com/user-attachments/assets/03696555-a4f1-4068-8d27-6e3eb863bca7" />
+<img width="780" height="245" alt="Screenshot 2026-07-30 135015" src="https://github.com/user-attachments/assets/e29bf852-71ee-4cd2-94e8-08363dedaf55" />
+
 
 **4. The "worst performing" products are mostly 2018 models — likely the same cutoff, not weak products**
 4 of the 5 lowest-revenue products are 2018 model-year bikes, each with well under $260 in lifetime revenue. Given finding #3, these products simply didn't get enough time on the market before the data window closed — they shouldn't be read as underperformers without that context.
 
-![Top 5 vs Bottom 5 Products](screenshots/04_top_bottom_products.png)
+<img width="507" height="642" alt="Screenshot 2026-07-30 135050" src="https://github.com/user-attachments/assets/26e5c4c7-4692-4244-88a8-b83b969f4966" />
+
 
 **5. Discounting is not moving volume**
 Across both discount bands present in the data (Low 1–10%, Medium 11–20%), the average units sold per order line is identical at **1.50** — discounting deeper had zero measurable effect on how much customers bought. This suggests current discounts are functioning as margin erosion rather than a real demand driver, and are worth revisiting.
 
-![Discount Effectiveness](screenshots/05_discount_effectiveness.png)
+<img width="642" height="482" alt="Screenshot 2026-07-30 135327" src="https://github.com/user-attachments/assets/61a5d3bc-8000-44b4-898c-62240b08dfcf" />
+
 
 ---
 
@@ -41,7 +45,8 @@ Across both discount bands present in the data (Low 1–10%, Medium 11–20%), t
 
 9 relational tables — customers and orders on one side, products/stocks/brands/categories on the other, joined through `order_items` as the central fact table.
 
-![Bike Store ERD](screenshots/06_erd_schema.png)
+<img width="945" height="791" alt="Screenshot 2026-07-30 142245" src="https://github.com/user-attachments/assets/9cf04ccd-a336-433f-b6ee-865f07640e33" />
+
 
 ---
 
