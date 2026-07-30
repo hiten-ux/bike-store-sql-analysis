@@ -119,13 +119,7 @@ bike-store-sql-analysis/
 ├── analysis/
 │   ├── bike_store_data_cleaning.sql     ← Data cleaning (NULL fixes, type corrections, status lookup)
 │   └── bike_store_analysis_views.sql    ← 12 business-insight views
-├── screenshots/
-│   ├── 01_customer_retention.png
-│   ├── 02_category_performance.png
-│   ├── 03_monthly_revenue_trend.png
-│   ├── 04_top_bottom_products.png
-│   ├── 05_discount_effectiveness.png
-│   └── 06_erd_schema.png
+
 └── README.md
 ```
 
