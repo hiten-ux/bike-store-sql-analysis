@@ -13,31 +13,27 @@ The goal of this project was not just to write queries, but to answer the questi
 **1. Customer retention is low — a real problem, not a minor stat**
 Only **9.07%** of customers (131 of 1,445) ever placed a second order. Over 90% of the customer base was acquired once and never returned, which points to an acquisition-heavy, retention-light business model with no visible loyalty or win-back mechanism.
 
-!<img width="650" height="88" alt="Screenshot 2026-07-30 134559" src="https://github.com/user-attachments/assets/63fb4270-189a-4968-a7cc-5b9beea16864" />
+![Customer Retention Summary](Screenshot/01_customer_retention.png)
 
 **2. Revenue is concentrated in one category, but not the one that sells the most units**
 Mountain Bikes generate **35.31%** of total revenue ($2.72M) despite Cruisers Bicycles moving more total units (2,063 vs. 1,755). This is a classic volume-vs-price-mix gap — Mountain Bikes carry a materially higher price point, so unit volume alone is a misleading measure of category importance.
 
-<img width="706" height="460" alt="Screenshot 2026-07-30 134723" src="https://github.com/user-attachments/assets/fce49864-71aa-43d7-9cf0-9a6f73ccfc59" />
+![Category Performance](Screenshot/02_category_performance.png)
 
 **3. Revenue trended upward through mid-2017, then the data collection window ends**
 Monthly revenue climbed from ~$215K (Jan 2016) to a peak of **$378,865** in June 2017, with real month-to-month volatility along the way (swings of ±20–40%). From May 2018 onward, order volume collapses to 1–4 orders/month — this is almost certainly the dataset's collection cutoff rather than a genuine business collapse, and the trend analysis is scoped accordingly to Jan 2016–Apr 2018.
 
-<img width="917" height="723" alt="Screenshot 2026-07-30 134927" src="https://github.com/user-attachments/assets/03696555-a4f1-4068-8d27-6e3eb863bca7" />
-<img width="780" height="245" alt="Screenshot 2026-07-30 135015" src="https://github.com/user-attachments/assets/e29bf852-71ee-4cd2-94e8-08363dedaf55" />
-
+![Monthly Revenue Trend](Screenshot/03_monthly_revenue_trend.png)
 
 **4. The "worst performing" products are mostly 2018 models — likely the same cutoff, not weak products**
 4 of the 5 lowest-revenue products are 2018 model-year bikes, each with well under $260 in lifetime revenue. Given finding #3, these products simply didn't get enough time on the market before the data window closed — they shouldn't be read as underperformers without that context.
 
-<img width="507" height="642" alt="Screenshot 2026-07-30 135050" src="https://github.com/user-attachments/assets/26e5c4c7-4692-4244-88a8-b83b969f4966" />
-
+![Top 5 vs Bottom 5 Products](Screenshot/04_top_bottom_products.png)
 
 **5. Discounting is not moving volume**
 Across both discount bands present in the data (Low 1–10%, Medium 11–20%), the average units sold per order line is identical at **1.50** — discounting deeper had zero measurable effect on how much customers bought. This suggests current discounts are functioning as margin erosion rather than a real demand driver, and are worth revisiting.
 
-<img width="642" height="482" alt="Screenshot 2026-07-30 135327" src="https://github.com/user-attachments/assets/61a5d3bc-8000-44b4-898c-62240b08dfcf" />
-
+![Discount Effectiveness](Screenshot/05_discount_effectiveness.png)
 
 ---
 
@@ -45,8 +41,7 @@ Across both discount bands present in the data (Low 1–10%, Medium 11–20%), t
 
 9 relational tables — customers and orders on one side, products/stocks/brands/categories on the other, joined through `order_items` as the central fact table.
 
-<img width="945" height="791" alt="Screenshot 2026-07-30 142245" src="https://github.com/user-attachments/assets/9cf04ccd-a336-433f-b6ee-865f07640e33" />
-
+![Bike Store ERD](Screenshot/06_erd_schema.png)
 
 ---
 
@@ -106,7 +101,7 @@ SELECT
 FROM customer_orders;
 ```
 
-Full logic for all 12 views is in [`analysis/bike_store_analysis_views.sql`](analysis/bike_store_analysis_views.sql). Cleaning steps are in [`analysis/bike_store_data_cleaning.sql`](analysis/bike_store_data_cleaning.sql).
+Full logic for all 12 views is in [`Analysis/bike_store_analysis_views.sql`](Analysis/bike_store_analysis_views.sql). Cleaning steps are in [`Analysis/bike_store_data_cleaning.sql`](Analysis/bike_store_data_cleaning.sql).
 
 ---
 
@@ -114,12 +109,12 @@ Full logic for all 12 views is in [`analysis/bike_store_analysis_views.sql`](ana
 
 ```
 bike-store-sql-analysis/
-├── raw_data/
+├── Raw_File/
 │   └── bike_store_combined.sql          ← Raw data import (9 tables, ~10,500 rows)
-├── analysis/
+├── Analysis/
 │   ├── bike_store_data_cleaning.sql     ← Data cleaning (NULL fixes, type corrections, status lookup)
 │   └── bike_store_analysis_views.sql    ← 12 business-insight views
-├── screenshots/
+├── Screenshot/
 │   ├── 01_customer_retention.png
 │   ├── 02_category_performance.png
 │   ├── 03_monthly_revenue_trend.png
@@ -131,9 +126,9 @@ bike-store-sql-analysis/
 
 ## ▶️ How to Run
 
-1. Execute `raw_data/bike_store_combined.sql` — creates the `bike_store` database and loads all 9 raw tables
-2. Execute `analysis/bike_store_data_cleaning.sql` — fixes data quality issues and adds the status lookup table
-3. Execute `analysis/bike_store_analysis_views.sql` — builds all 12 analytical views
+1. Execute `Raw_File/bike_store_combined.sql` — creates the `bike_store` database and loads all 9 raw tables
+2. Execute `Analysis/bike_store_data_cleaning.sql` — fixes data quality issues and adds the status lookup table
+3. Execute `Analysis/bike_store_analysis_views.sql` — builds all 12 analytical views
 4. Query any view directly, e.g.:
    ```sql
    SELECT * FROM vw_customer_retention_summary;
@@ -149,10 +144,3 @@ MySQL 8.0 · Window Functions · Common Table Expressions · Views · MySQL Work
 
 Part of a self-built 12-project data analytics portfolio spanning Excel, SQL, Power BI, and Python.
 Full portfolio: [github.com/hiten-ux](https://github.com/hiten-ux)
-
-
-## 🔗 Connect with Me
-
-- **GitHub:** [hiten-ux](https://github.com/hiten-ux)
-- **LinkedIn:** [[Your LinkedIn URL]](https://www.linkedin.com/in/hiten-solanki-03bb10413/)
-- **Email:** hiten0698@gmail.com
