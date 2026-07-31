@@ -13,27 +13,27 @@ The goal of this project was not just to write queries, but to answer the questi
 **1. Customer retention is low — a real problem, not a minor stat**
 Only **9.07%** of customers (131 of 1,445) ever placed a second order. Over 90% of the customer base was acquired once and never returned, which points to an acquisition-heavy, retention-light business model with no visible loyalty or win-back mechanism.
 
-![Customer Retention Summary](Screenshot/01_customer_retention.png)
+!<img width="661" height="376" alt="Screenshot 2026-07-30 134626" src="https://github.com/user-attachments/assets/5d4ae6e0-c9d0-4243-8f9e-110b23150ddd" />
 
 **2. Revenue is concentrated in one category, but not the one that sells the most units**
 Mountain Bikes generate **35.31%** of total revenue ($2.72M) despite Cruisers Bicycles moving more total units (2,063 vs. 1,755). This is a classic volume-vs-price-mix gap — Mountain Bikes carry a materially higher price point, so unit volume alone is a misleading measure of category importance.
 
-![Category Performance](Screenshot/02_category_performance.png)
+<img width="706" height="460" alt="Screenshot 2026-07-30 134723" src="https://github.com/user-attachments/assets/c0f3dcc3-8ddc-4bf3-9441-60a7acff10b8" />
 
 **3. Revenue trended upward through mid-2017, then the data collection window ends**
 Monthly revenue climbed from ~$215K (Jan 2016) to a peak of **$378,865** in June 2017, with real month-to-month volatility along the way (swings of ±20–40%). From May 2018 onward, order volume collapses to 1–4 orders/month — this is almost certainly the dataset's collection cutoff rather than a genuine business collapse, and the trend analysis is scoped accordingly to Jan 2016–Apr 2018.
+<img width="917" height="723" alt="Screenshot 2026-07-30 134927" src="https://github.com/user-attachments/assets/88ca23d7-d31e-47c1-803a-e5d76016df14" />
+<img width="780" height="245" alt="Screenshot 2026-07-30 135015" src="https://github.com/user-attachments/assets/1db1ad4c-465d-4b00-af5d-c0e4728940ec" />
 
-![Monthly Revenue Trend](Screenshot/03_monthly_revenue_trend.png)
 
 **4. The "worst performing" products are mostly 2018 models — likely the same cutoff, not weak products**
 4 of the 5 lowest-revenue products are 2018 model-year bikes, each with well under $260 in lifetime revenue. Given finding #3, these products simply didn't get enough time on the market before the data window closed — they shouldn't be read as underperformers without that context.
 
-![Top 5 vs Bottom 5 Products](Screenshot/04_top_bottom_products.png)
+<img width="507" height="642" alt="Screenshot 2026-07-30 135050" src="https://github.com/user-attachments/assets/537f5a4e-ba20-4ed3-a4a2-c6ec0a064a92" />
 
 **5. Discounting is not moving volume**
 Across both discount bands present in the data (Low 1–10%, Medium 11–20%), the average units sold per order line is identical at **1.50** — discounting deeper had zero measurable effect on how much customers bought. This suggests current discounts are functioning as margin erosion rather than a real demand driver, and are worth revisiting.
-
-![Discount Effectiveness](Screenshot/05_discount_effectiveness.png)
+<img width="642" height="482" alt="Screenshot 2026-07-30 135327" src="https://github.com/user-attachments/assets/6714aa29-6eaf-40c8-9fdf-accef96bf98d" />
 
 ---
 
@@ -41,7 +41,7 @@ Across both discount bands present in the data (Low 1–10%, Medium 11–20%), t
 
 9 relational tables — customers and orders on one side, products/stocks/brands/categories on the other, joined through `order_items` as the central fact table.
 
-![Bike Store ERD](Screenshot/06_erd_schema.png)
+<img width="945" height="791" alt="Screenshot 2026-07-30 142245" src="https://github.com/user-attachments/assets/136ec2bd-d80b-4380-a13f-446332c35df0" />
 
 ---
 
@@ -101,7 +101,7 @@ SELECT
 FROM customer_orders;
 ```
 
-Full logic for all 12 views is in [`Analysis/bike_store_analysis_views.sql`]Analysis /bike_store_analysis_views.sql. Cleaning steps are in [`Analysis/bike_store_data_cleaning.sql`](Analysis/bike_store_data_cleaning.sql).
+
 
 ---
 
@@ -142,5 +142,17 @@ MySQL 8.0 · Window Functions · Common Table Expressions · Views · MySQL Work
 
 ## 👤 About
 
-Part of a self-built 12-project data analytics portfolio spanning Excel, SQL, Power BI, and Python.
-Full portfolio: [github.com/hiten-ux](https://github.com/hiten-ux)
+Part of a self-built 12-project data analytics portfolio spanning Excel, SQL, Power BI, and Python
+
+🔗 Connect with Me
+GitHub: hiten-ux
+LinkedIn: [Your LinkedIn URL]
+Email: hiten0698@gmail.com
+📄 License
+This project is for portfolio and educational purposes only.
+
+⭐ If you find this helpful...
+If you find this project useful, please consider giving it a star ⭐ on GitHub!
+
+
+
