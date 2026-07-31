@@ -101,7 +101,7 @@ SELECT
 FROM customer_orders;
 ```
 
-Full logic for all 12 views is in [`Analysis/bike_store_analysis_views.sql`](Analysis/bike_store_analysis_views.sql). Cleaning steps are in [`Analysis/bike_store_data_cleaning.sql`](Analysis/bike_store_data_cleaning.sql).
+Full logic for all 12 views is in [`Analysis/bike_store_analysis_views.sql`]Analysis /bike_store_analysis_views.sql. Cleaning steps are in [`Analysis/bike_store_data_cleaning.sql`](Analysis/bike_store_data_cleaning.sql).
 
 ---
 
