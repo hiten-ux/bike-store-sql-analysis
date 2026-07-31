@@ -144,15 +144,23 @@ MySQL 8.0 · Window Functions · Common Table Expressions · Views · MySQL Work
 
 Part of a self-built 12-project data analytics portfolio spanning Excel, SQL, Power BI, and Python
 
-🔗 Connect with Me
-GitHub: hiten-ux
-LinkedIn: [Your LinkedIn URL]
-Email: hiten0698@gmail.com
-📄 License
-This project is for portfolio and educational purposes only.
 
-⭐ If you find this helpful...
+## 🔗 Connect with Me
+
+- **GitHub:** [hiten-ux](https://github.com/hiten-ux)
+- **LinkedIn:** [[Your LinkedIn URL]](https://www.linkedin.com/in/hiten-solanki-03bb10413/)
+- **Email:** hiten0698@gmail.com
+
+---
+
+## 📄 License
+
+This project is for **portfolio and educational purposes** only.
+
+---
+
+## ⭐ If you find this helpful...
+
 If you find this project useful, please consider giving it a star ⭐ on GitHub!
-
 
 
